@@ -1,15 +1,15 @@
 {
-    "name": "Elixir, Node.js & PostgreSQL",
-    "dockerFile": "Dockerfile",
-    "forwardPorts": [4000],
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "jakebecker.elixir-ls"
-        ],
-        "settings": {}
-      }
-    },
-    "postCreateCommand": "echo 'postCreateCommand'\nmix local.hex --if-missing --force\nmix local.rebar --if-missing --force\nmix deps.get\nmix ecto.create\nmix ecto.migrate",
-    "appPort": 4000
-  }
+  "name": "Elixir, Node.js & PostgreSQL",
+  "dockerFile": "Dockerfile",
+  "forwardPorts": [4000],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "jakebecker.elixir-ls"
+      ],
+      "settings": {}
+    }
+  },
+  "postCreateCommand": "mix deps.get && mix local.hex --if-missing --force && mix local.rebar --if-missing --force && mix deps.get && mix ecto.create && mix ecto.migrate",
+  "appPort": 4000
+}

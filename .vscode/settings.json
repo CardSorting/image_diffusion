@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.profiles.linux": {
+      "MyCustomBash": {
+        "path": "/bin/bash"
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "MyCustomBash"
+  }
