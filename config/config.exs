@@ -30,6 +30,10 @@ config :image_diffusion, ImageDiffusionWeb.Endpoint,
 config :image_diffusion, ImageDiffusion.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
+config :ex_aws,
+  access_key_id: System.get_env("AKIAXH5DBMF4KV7RF3DX"),
+  secret_access_key: System.get_env("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"),
+  region: System.get_env("AWS_REGION") || "us-east-1"
 config :esbuild,
   version: "0.17.11",
   default: [
@@ -38,7 +42,10 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
-
+  config :waffle,
+  storage: Waffle.Storage.S3,
+  bucket: System.get_env("S3_IMAGE_BUCKET"),
+  asset_host: {:system, "S3_ASSET_HOST"}
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.2.7",

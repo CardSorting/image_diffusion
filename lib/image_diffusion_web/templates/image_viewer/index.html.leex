@@ -1,0 +1,27 @@
+<div>
+  <label for="prompt">Prompt:</label>
+  <input type="text" id="prompt" phx-hook="InputPrompt" />
+  <button phx-click="generate" phx-target="#generated_image">Generate</button>
+</div>
+<div id="generated_image" class="mt-4">
+  <%= if @generated_image do %>
+  <p>Generated Image:</p>
+  <img src="<%= @generated_image %>" alt="Generated image" />
+  <% end %>
+</div>
+
+<script>
+  (() => {
+    let Hooks = {}
+    Hooks.InputPrompt = {
+      mounted() {
+        this.el.addEventListener("input", () => {
+          const prompt = this.el.value.trim()
+          this.pushEventTo("#generated_image", "generate", {prompt: prompt})
+        })
+      }
+    }
+    window.liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks})
+    window.liveSocket.connect()
+  })()
+</script>
